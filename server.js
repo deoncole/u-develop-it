@@ -26,8 +26,36 @@ const db = mysql.createConnection(
 );
 
 // return all of the data in the candidates table one row at a time
-db.query(`SELECT * FROM candidates`, (err, rows)=>{
-    console.log(rows);
+// db.query(`SELECT * FROM candidates`, (err, rows)=>{
+//     console.log(rows);
+// });
+
+// GET a singel candidate
+db.query(`SELECT * FROM candidates WHERE id = 1`, (err,row)=>{
+    if(err){
+        console.log (err)
+    }
+    console.log(row);
+});
+
+// Delete a candidate
+// db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err,result)=>{
+//     if(err){
+//         console.log(err);
+//     }
+//     console.log(result);
+// });
+
+// create a candidate
+const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected)
+                VALUES(?,?,?,?)`;
+const params = [1, 'Ronald', 'Firbank', 1];
+
+db.query(sql, params, (err, result)=>{
+    if(err){
+        console.log(err)
+    }
+    console.log(result);
 });
 
 // create a route to handle request not supported by the app. This has to be the last route
