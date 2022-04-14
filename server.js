@@ -27,7 +27,11 @@ const db = mysql.createConnection(
 );
 // get all the candidates
 app.get('/api/candidates', (req,res)=>{
-    const sql = `SELECT * FROM candidates`;
+    const sql = `SELECT candidates.*, parties.name 
+                AS party_name 
+                FROM candidates 
+                LEFT JOIN parties 
+                ON candidates.party_id = parties.id`;
 
     // return all of the data in the candidates table one row at a time
     db.query(sql, (err, rows)=>{
@@ -44,7 +48,13 @@ app.get('/api/candidates', (req,res)=>{
 
 // GET a singel candidate
 app.get('/api/candidate/:id', (req,res)=>{
-    const sql = `SELECT * FROM candidates WHERE id = ?`;
+    const sql = `SELECT candidates.*, parties.name 
+                AS party_name 
+                 FROM candidates 
+                LEFT JOIN parties 
+                ON candidates.party_id = parties.id 
+                 WHERE candidates.id = ?`;
+                 
     // get the id using the parameter 
     const params = [req.params.id];
 
