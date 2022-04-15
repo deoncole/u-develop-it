@@ -33,8 +33,3 @@ db.connect(err => {
     console.log(`Server running on port ${PORT}`);
   });
 });
-
-// set up the server to start listening
-app.listen(PORT, ()=>{
-    console.log(`Server running on port ${PORT}`)
-});

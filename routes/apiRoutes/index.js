@@ -6,5 +6,6 @@ const router = express.Router();
 // call for the router to use the specific routes
 router.use(require('./candidateRoutes'));
 router.use(require('./partyRoutes'));
+router.use(require('./voterRoutes'));
 
 module.exports = router;
